@@ -1,3 +1,5 @@
+import os
+
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
@@ -15,3 +17,9 @@ process = CrawlerProcess(settings)
 process.crawl(KingdomSpider)
 process.crawl(KkulbeolSpider)
 process.start()
+
+src = settings['DATABASE_NAME']
+dest = 'last.sqlite' #src
+print('Copying database file to backend directory')
+os.system('mv {} ../back/database/{}'.format(src, dest))
+print('Done')
