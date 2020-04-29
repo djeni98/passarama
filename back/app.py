@@ -11,15 +11,19 @@ init_app(app)
 
 @app.route('/')
 def routes():
-    pt = {
-        '/fansubs': 'Lista todas as fansubs presentes na base',
-        '/doramas': 'Lista todos os doramas disponíveis em fansubs'
+    fansubs = {
+        'pt': 'Lista todas as fansubs presentes na base',
+        'en': 'List all fansubs in the database',
+        'query_params': ['limit', 'offset', 'name'],
+        'response': '[{ "spider", "name", "link", "image", "facebook" }]'
     }
-    en = {
-        '/fansubs': 'List all fansubs in the database',
-        '/doramas': 'List all dramas available in fansubs'
+    doramas = {
+        'pt': 'Lista todos os doramas disponíveis em fansubs',
+        'en': 'List all dramas available in fansubs',
+        'query_params': ['limit', 'offset', 'title', 'fansub'],
+        'response': '[{ "fansub", "title", "link" }]'
     }
-    return jsonify({ 'pt': pt, 'en': en })
+    return jsonify({ '/fansubs': fansubs, '/doramas': doramas })
 
 @app.route('/fansubs')
 def fansubs():
