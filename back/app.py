@@ -4,6 +4,7 @@ from flask import Flask, g, jsonify, request
 from werkzeug.datastructures import Headers
 
 from db_config import query_db, init_app
+from default_settings import PAGINATION
 
 app = Flask(__name__)
 init_app(app)
@@ -22,6 +23,9 @@ def routes():
 
 @app.route('/fansubs')
 def fansubs():
+    limit = int(request.args.get('limit', PAGINATION['limit']))
+    offset = int(request.args.get('offset', PAGINATION['offset']))
+
     name = request.args.get('name', '')
     name_pattern = '%' + name.replace(' ', '%') + '%'
 
@@ -32,12 +36,16 @@ def fansubs():
     r = query_db('''
         SELECT spider, name, link, image, facebook FROM fansub
         WHERE UPPER(name) LIKE UPPER(?)
-    ''', (name_pattern,))
+        LIMIT ? OFFSET ?
+    ''', (name_pattern, limit, offset))
 
     return ( jsonify(r), headers )
 
 @app.route('/doramas')
 def doramas():
+    limit = int(request.args.get('limit', PAGINATION['limit']))
+    offset = int(request.args.get('offset', PAGINATION['offset']))
+
     title = request.args.get('title', '')
     spider = request.args.get('spider', '')
 
@@ -54,6 +62,7 @@ def doramas():
         WHERE
             UPPER(dorama.title) LIKE UPPER(?) AND
             fansub.spider LIKE LOWER(?)
-    ''', (title_pattern, spider_pattern))
+        LIMIT ? OFFSET ?
+    ''', (title_pattern, spider_pattern, limit, offset))
 
     return ( jsonify(r), headers )
