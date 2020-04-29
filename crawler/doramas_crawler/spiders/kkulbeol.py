@@ -3,6 +3,13 @@ import scrapy
 
 class KkulbeolSpider(scrapy.Spider):
     name = 'kkulbeol'
+    allowed_domains = ['kkulbeol.ucoz.net']
+    fansub = {
+        'name': 'Kkulbeol Dramas Fansub',
+        'facebook': 'https://www.facebook.com/kkulbeoldramasfansub',
+        'image': 'https://bit.ly/3aLplpC'
+    }
+
     start_urls = [
         'http://kkulbeol.ucoz.net/index/dramas-ativos/0-16',
         'http://kkulbeol.ucoz.net/index/k-dramas-01/0-11',

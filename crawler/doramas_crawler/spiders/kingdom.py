@@ -5,6 +5,11 @@ from doramas_crawler.spiders.logindata import kingdom
 class KingdomSpider(scrapy.Spider):
     name = 'kingdom'
     allowed_domains = ['kingdomfansubs.forumeiros.com']
+    fansub = {
+        'name': 'Kingdom Fansubs',
+        'facebook': 'https://www.facebook.com/kingdomfansubs',
+        'image': 'https://bit.ly/2W4K2Yx'
+    }
 
     def start_requests(self):
         form = {

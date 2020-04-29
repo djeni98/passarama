@@ -27,7 +27,10 @@ def fansub_table(spiders, database):
         CREATE TABLE fansub (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             spider TEXT NOT NULL,
-            link TEXT
+            link TEXT,
+            name TEXT,
+            image TEXT,
+            facebook TEXT
         )'''
     )
 
@@ -36,10 +39,17 @@ def fansub_table(spiders, database):
         if hasattr(spider, 'allowed_domains'):
             link = 'https://' + spider.allowed_domains[0]
 
-        values = (spider.name, link)
+        fansub = [None, None, None]
+        if hasattr(spider, 'fansub'):
+            fansub = [spider.fansub.get('name')]
+            fansub.append(spider.fansub.get('image'))
+            fansub.append(spider.fansub.get('facebook'))
+
+        values = [spider.name, link]
+        values.extend(fansub)
         c.execute('''
-            INSERT INTO fansub (spider, link)
-            VALUES (?, ?)''', values)
+            INSERT INTO fansub (spider, link, name, image, facebook)
+            VALUES (?, ?, ?, ?, ?)''', tuple(values))
 
     conn.commit()
     conn.close()

@@ -14,8 +14,8 @@ create_database_tables(spiders, settings['DATABASE_NAME'])
 
 process = CrawlerProcess(settings)
 
-process.crawl(KingdomSpider)
-process.crawl(KkulbeolSpider)
+for spider in spiders:
+    process.crawl(spider)
 process.start()
 
 src = settings['DATABASE_NAME']
