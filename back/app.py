@@ -1,6 +1,8 @@
 # coding: utf-8
 import json
 from flask import Flask, g, jsonify, request
+from werkzeug.datastructures import Headers
+
 from db_config import query_db, init_app
 
 app = Flask(__name__)
@@ -23,11 +25,16 @@ def fansubs():
     name = request.args.get('name', '')
     name_pattern = '%' + name.replace(' ', '%') + '%'
 
+    count = query_db('SELECT COUNT(id) as total FROM fansub', one=True)
+    headers = Headers()
+    headers.add('X-Total-Count', count['total'])
+
     r = query_db('''
         SELECT spider, name, link, image, facebook FROM fansub
         WHERE UPPER(name) LIKE UPPER(?)
     ''', (name_pattern,))
-    return jsonify(r)
+
+    return ( jsonify(r), headers )
 
 @app.route('/doramas')
 def doramas():
@@ -37,6 +44,10 @@ def doramas():
     title_pattern = '%' + title.replace(' ', '%') + '%'
     spider_pattern = '%' + spider.replace(' ', '%') + '%'
 
+    count = query_db('SELECT COUNT(id) as total FROM dorama', one=True)
+    headers = Headers()
+    headers.add('X-Total-Count', count['total'])
+
     r = query_db('''
         SELECT dorama.title, dorama.link, fansub.spider FROM dorama
         INNER JOIN fansub ON dorama.fansubId=fansub.id
@@ -44,4 +55,5 @@ def doramas():
             UPPER(dorama.title) LIKE UPPER(?) AND
             fansub.spider LIKE LOWER(?)
     ''', (title_pattern, spider_pattern))
-    return jsonify(r)
+
+    return ( jsonify(r), headers )
