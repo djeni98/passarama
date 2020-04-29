@@ -47,22 +47,22 @@ def doramas():
     offset = int(request.args.get('offset', PAGINATION['offset']))
 
     title = request.args.get('title', '')
-    spider = request.args.get('spider', '')
+    fansub = request.args.get('fansub', '')
 
     title_pattern = '%' + title.replace(' ', '%') + '%'
-    spider_pattern = '%' + spider.replace(' ', '%') + '%'
+    fansub_pattern = '%' + fansub.replace(' ', '%') + '%'
 
     count = query_db('SELECT COUNT(id) as total FROM dorama', one=True)
     headers = Headers()
     headers.add('X-Total-Count', count['total'])
 
     r = query_db('''
-        SELECT dorama.title, dorama.link, fansub.spider FROM dorama
+        SELECT dorama.title, dorama.link, fansub.name as fansub FROM dorama
         INNER JOIN fansub ON dorama.fansubId=fansub.id
         WHERE
             UPPER(dorama.title) LIKE UPPER(?) AND
-            fansub.spider LIKE LOWER(?)
+            UPPER(fansub.name) LIKE UPPER(?)
         LIMIT ? OFFSET ?
-    ''', (title_pattern, spider_pattern, limit, offset))
+    ''', (title_pattern, fansub_pattern, limit, offset))
 
     return ( jsonify(r), headers )
