@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bigelow+Rules&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 * {
@@ -18,4 +19,28 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.logo-font {
+  font-family: 'Bigelow Rules', serif;
+  letter-spacing: 0.05em;
+}
+
+h1.logo-font {
+  font-size: 100px;
+  color: #112D38;
+}
+
+.logo-image {
+  height: 100px;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 50px;
+  color: #000000;
+}
+
+.mb-7 {
+  margin-bottom: 5rem !important;
 }

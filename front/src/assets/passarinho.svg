@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="a780dc9c-2107-4fd6-8fec-765248a5097a"
+   data-name="Layer 1"
+   width="409.83441"
+   height="444.90518"
+   viewBox="0 0 409.83441 444.90519"
+   version="1.1"
+   sodipodi:docname="passarinho.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata85">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>happy_music</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs83" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="714"
+     id="namedview81"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.43185966"
+     inkscape:cx="-95.84102"
+     inkscape:cy="316.19423"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="a780dc9c-2107-4fd6-8fec-765248a5097a" />
+  <title
+     id="title2">happy_music</title>
+  <g
+     id="g915"
+     transform="translate(-237.3597,-305.47481)">
+    <circle
+       style="fill:#112d38;fill-opacity:1"
+       id="circle38"
+       r="166.22823"
+       cy="503.4819"
+       cx="442.27689" />
+    <path
+       id="path40"
+       transform="translate(-156.11386,-63.58465)"
+       d="m 493.73979,580.41025 a 43.98767,43.98767 0 0 1 67.51907,0 48.89067,48.89067 0 1 0 -67.51907,0 z"
+       inkscape:connector-curvature="0"
+       style="fill:#ffffff" />
+    <path
+       id="path42"
+       transform="translate(-156.11386,-63.58465)"
+       d="m 625.74457,580.41025 a 43.98759,43.98759 0 0 1 67.519,0 48.89064,48.89064 0 1 0 -67.519,0 z"
+       inkscape:connector-curvature="0"
+       style="fill:#ffffff" />
+    <circle
+       style="fill:#112d38;fill-opacity:1"
+       id="circle44"
+       r="16.817881"
+       cy="464.81393"
+       cx="354.70737" />
+    <circle
+       style="fill:#112d38;fill-opacity:1"
+       id="circle46"
+       r="16.817881"
+       cy="464.81393"
+       cx="486.70737" />
+    <circle
+       id="circle48"
+       r="19.556259"
+       cy="545.03894"
+       cx="322.49478"
+       style="fill:#ff6584" />
+    <circle
+       id="circle50"
+       r="19.556259"
+       cy="545.03894"
+       cx="547.39178"
+       style="fill:#ff6584" />
+    <polygon
+       style="fill:#ffe874;fill-opacity:1"
+       id="polygon52"
+       points="444.721,545.039 434.943,505.926 420.276,569.484 " />
+    <polygon
+       style="fill:#112d38;fill-opacity:1"
+       id="polygon54"
+       points="494.043,750.38 488.871,750.38 488.458,735.602 465.975,750.38 456.563,750.38 488.29,729.526 487.061,685.737 486.143,652.666 491.302,652.524 492.233,685.737 493.461,729.487 518.348,750.38 510.307,750.38 493.655,736.404 " />
+    <polygon
+       style="fill:#112d38;fill-opacity:1"
+       id="polygon56"
+       points="415.812,750.38 410.654,750.38 410.24,735.602 387.757,750.38 378.345,750.38 410.059,729.526 408.831,685.737 407.913,652.666 413.084,652.524 414.015,685.737 415.23,729.487 440.118,750.38 432.076,750.38 415.424,736.404 " />
+    <path
+       style="fill:#112d38;fill-opacity:1"
+       id="path58"
+       transform="translate(-156.11386,-63.58465)"
+       d="m 600.83528,388.61566 c -4.56112,0 -8.58481,3.543 -11.27493,8.985 -2.37112,-8.18315 -7.3527,-13.874 -13.1704,-13.874 a 8.84714,8.84714 0 0 0 -1.17422,0.19724 c -2.23625,-8.737 -7.43356,-14.86444 -13.493,-14.86444 -8.1005,0 -14.6672,10.9446 -14.6672,24.44533 0,13.50073 6.5667,24.44533 14.6672,24.44533 a 8.84716,8.84716 0 0 0 1.17422,-0.19725 c 2.23625,8.737 7.43356,14.86444 13.493,14.86444 4.56112,0 8.58481,-3.543 11.27493,-8.985 2.37113,8.18316 7.3527,13.874 13.1704,13.874 8.1005,0 14.6672,-10.9446 14.6672,-24.44533 0,-13.50073 -6.5667,-24.44532 -14.6672,-24.44532 z"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path60"
+       transform="rotate(180,339.86191,537.15407)"
+       d="m 393.47351,507.83307 v 0 a 48.89061,48.89061 0 0 1 48.89061,48.89061 v 24.44543 a 48.89061,48.89061 0 0 1 -48.89061,48.89061 v 0 z"
+       inkscape:connector-curvature="0"
+       style="fill:#ff7e36" />
+    <path
+       id="path62"
+       d="m 598.30346,444.24843 v 0 a 48.89061,48.89061 0 0 1 48.89066,48.89057 v 24.44543 a 48.89061,48.89061 0 0 1 -48.89061,48.89061 v 0 -122.22661 z"
+       inkscape:connector-curvature="0"
+       style="fill:#ff7e36" />
+    <path
+       id="path64"
+       transform="translate(-156.11386,-63.58465)"
+       d="m 780.03662,560.56514 h -7.75712 c 0,-98.37742 -80.03569,-178.41374 -178.41374,-178.41374 -98.37742,0 -178.41374,80.03632 -178.41374,178.41374 h -7.75712 c 0,-102.655 83.51592,-186.17086 186.17086,-186.17086 102.65558,0 186.17086,83.51591 186.17086,186.17086 z"
+       inkscape:connector-curvature="0"
+       style="fill:#ff7e36" />
+  </g>
+</svg>
