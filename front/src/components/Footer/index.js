@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './styles.css';
-import logoImg from '../../assets/passarinho-invertido.svg';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
