@@ -1,13 +1,23 @@
 # coding: utf-8
 import json
 from flask import Flask, g, jsonify, request
-from werkzeug.datastructures import Headers
+from werkzeug.datastructures import Headers as createHeaders
 
 from db_config import query_db, init_app
 from default_settings import PAGINATION
 
 app = Flask(__name__)
 init_app(app)
+
+def Headers(total = None):
+    h = createHeaders()
+    h.add('Access-Control-Allow-Origin', '*')
+
+    if total:
+        h.add('Access-Control-Expose-Headers', 'X-Total-Count')
+        h.add('X-Total-Count', total)
+
+    return h
 
 @app.route('/')
 def routes():
@@ -23,7 +33,11 @@ def routes():
         'query_params': ['limit', 'offset', 'title', 'fansub'],
         'response': '[{ "fansub", "title", "link" }]'
     }
-    return jsonify({ '/fansubs': fansubs, '/doramas': doramas })
+
+    return (
+        jsonify({ '/fansubs': fansubs, '/doramas': doramas }),
+        Headers()
+    )
 
 @app.route('/fansubs')
 def fansubs():
@@ -33,17 +47,18 @@ def fansubs():
     name = request.args.get('name', '')
     name_pattern = '%' + name.replace(' ', '%') + '%'
 
-    count = query_db('SELECT COUNT(id) as total FROM fansub', one=True)
-    headers = Headers()
-    headers.add('X-Total-Count', count['total'])
-
     r = query_db('''
         SELECT spider, name, link, image, facebook FROM fansub
         WHERE UPPER(name) LIKE UPPER(?)
         LIMIT ? OFFSET ?
     ''', (name_pattern, limit, offset))
 
-    return ( jsonify(r), headers )
+    count = query_db('''
+        SELECT COUNT(id) as total FROM fansub
+        WHERE UPPER(name) LIKE UPPER(?)
+    ''', (name_pattern, ), one=True)
+
+    return ( jsonify(r), Headers(count['total']) )
 
 @app.route('/doramas')
 def doramas():
@@ -56,9 +71,13 @@ def doramas():
     title_pattern = '%' + title.replace(' ', '%') + '%'
     fansub_pattern = '%' + fansub.replace(' ', '%') + '%'
 
-    count = query_db('SELECT COUNT(id) as total FROM dorama', one=True)
-    headers = Headers()
-    headers.add('X-Total-Count', count['total'])
+    count = query_db('''
+        SELECT COUNT(dorama.id) as total FROM dorama
+        INNER JOIN fansub ON dorama.fansubId=fansub.id
+        WHERE
+            UPPER(dorama.title) LIKE UPPER(?) AND
+            UPPER(fansub.name) LIKE UPPER(?)
+    ''', (title_pattern, fansub_pattern), one=True)
 
     r = query_db('''
         SELECT dorama.title, dorama.link, fansub.name as fansub FROM dorama
@@ -69,4 +88,4 @@ def doramas():
         LIMIT ? OFFSET ?
     ''', (title_pattern, fansub_pattern, limit, offset))
 
-    return ( jsonify(r), headers )
+    return ( jsonify(r), Headers(count['total']) )
