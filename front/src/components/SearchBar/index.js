@@ -18,6 +18,12 @@ export default function SearchBar (props) {
     }
   }
 
+  function checkEnterKey(event) {
+    if (event.key === 'Enter') {
+      handleClick();
+    }
+  }
+
   return (
     <div className="search-bar">
       <input
@@ -25,6 +31,7 @@ export default function SearchBar (props) {
         placeholder="Pesquise..."
         value={value}
         onChange={e => setValue(e.target.value)}
+        onKeyPress={checkEnterKey}
       />
       <button
           className="search-button"

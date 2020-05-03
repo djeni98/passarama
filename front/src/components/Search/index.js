@@ -12,19 +12,32 @@ import './styles.css';
 
 export default function SearchPage () {
   const [doramas, setDoramas] = useState([]);
+  const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(0);
+
+  const [searchValue, setSearchValue] = useState('');
   const [noResults, setNoResults] = useState(false);
 
-  function getDorama(value) {
-    const params = value ? { title: value } : {}
+  function getDorama(value, mais = false) {
+    let params =  { limit: 20 };
+    if (mais) {
+      params.offset = offset + 20
+    }
+    if (value) {
+      params.title = value
+    }
 
+    setSearchValue(value);
     api.get('doramas', { params })
       .then(response => {
-        console.log(response.headers);
-        setTotal(response.headers['x-total-count']);
-        setDoramas(response.data);
-
-        setNoResults(!response.headers['x-total-count']);
+        if (mais) {
+          setDoramas([...doramas, ...response.data]);
+          setOffset(offset + 20);
+        } else {
+          setDoramas(response.data);
+          setTotal(response.headers['x-total-count']);
+          setNoResults(!response.headers['x-total-count']);
+        }
       })
   }
 
@@ -32,12 +45,10 @@ export default function SearchPage () {
   const query = location.state;
 
   useEffect(() => {
-    console.log('useEffect', query);
     if (query !== undefined) {
       getDorama(query);
     }
   }, [query]);
-
 
   return (
     <>
@@ -73,6 +84,19 @@ export default function SearchPage () {
               ))
             }
           </Row>
+          { doramas.length < total ? (
+            <Row>
+              <Col
+                xs={{span: 10, offset: 1}}
+                md={{span: 8, offset: 2}}
+                lg={{span: 6, offset: 3}}
+              >
+                <button className="chip" onClick={() => getDorama(searchValue, true)}>
+                  Mais Resultados
+                </button>
+              </Col>
+            </Row>
+          ) : null }
         </Container>
       ) : null }
 
