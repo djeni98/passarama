@@ -22,13 +22,26 @@ code {
 }
 
 h1 {
-  font-weight: bold;
   font-size: 50px;
   color: #000000;
 }
 
+.pl-inherit {
+  padding-left: inherit
+}
+
+.mt-7 {
+  margin-top: 5rem !important;
+}
+
 .mb-7 {
   margin-bottom: 5rem !important;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /** Orange Button **/
@@ -47,6 +60,15 @@ button:hover {
   transition: 0.2s;
 }
 
+/** Font **/
+.font-18 {
+  font-size: 18px;
+}
+
+.font-22 {
+  font-size: 22px;
+}
+
 /** Logo **/
 
 .logo-font {
@@ -61,6 +83,20 @@ h1.logo-font {
 
 .logo-image {
   height: 100px;
+}
+
+/** Colors **/
+
+.bg-yellow {
+  background-color: #FFE874;
+}
+
+.bg-orange {
+  background-color: #FF7335;
+}
+
+.bg-blue {
+  background-color: #112D38;
 }
 
 /** Footer **/

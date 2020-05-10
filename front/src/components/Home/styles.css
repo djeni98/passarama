@@ -1,6 +1,10 @@
-.header {
+.header-main {
   background-color: #FFE874;
   min-height: 275px;
   padding-top: 50px;
   padding-bottom: 50px;
+}
+
+.max-width {
+  max-width: 500px;
 }

@@ -5,15 +5,20 @@ import {
 } from 'react-router-dom';
 
 import Home from './components/Home';
+import About from './components/About';
 import Search from './components/Search';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/search" component={Search} />
-        <Route path="/" component={Home} />
-      </Switch>
+      <ScrollToTop>
+        <Switch>
+          <Route path="/about" component={About} />
+          <Route path="/search" component={Search} />
+          <Route path="/" exact component={Home} />
+        </Switch>
+      </ScrollToTop>
     </BrowserRouter>
   );
 }

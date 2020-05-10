@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
 import api from '../api';
 import SearchBar from '../SearchBar';
+
 import Footer from '../Footer';
 
 import './styles.css';
@@ -48,6 +49,7 @@ export default function SearchPage () {
     if (query !== undefined) {
       getDorama(query);
     }
+  // eslint-disable-next-line
   }, [query]);
 
   return (
@@ -66,7 +68,7 @@ export default function SearchPage () {
         <Container className="mb-5">
           <Row className="mb-3">
             <Col>
-              <h2 className="text-right">{total} Resultado(s)</h2>
+              <h2 className="text-right">{doramas.length} de {total} Resultado(s)</h2>
             </Col>
           </Row>
           <Row xs={1} md={2} lg={3} xl={4} className="align-items-stretch mb-3">

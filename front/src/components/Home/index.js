@@ -13,7 +13,7 @@ import Footer from '../Footer';
 export default function Home() {
   return (
     <>
-      <Container fluid className="header mb-7">
+      <Container fluid className="header-main mb-7">
         <Row>
           <Col xs={12} sm={1} md={2}/>
           <Col >
@@ -39,9 +39,9 @@ export default function Home() {
 
       <Container className="mb-7">
         <Row>
-          <Col className="mb-5">
-            <h1 className="mb-5">Procure doramas e <br/> ache as fansubs</h1>
-            <h3>Vá para a fansub certa, sem gastar <br/> tempo procurando seus doramas</h3>
+          <Col className="mb-5 max-width">
+            <h1 className="mb-5 font-weight-bold">Procure doramas e ache as fansubs</h1>
+            <h3>Vá para a fansub certa, sem gastar tempo procurando seus doramas</h3>
           </Col>
           <Col className="d-flex justify-content-end align-items-center">
             <img
