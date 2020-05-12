@@ -32,6 +32,7 @@ export default function Header(props) {
           <Nav className="ml-auto">
             <NavLink className="nav-link" exact to="/">Início</NavLink>
             <NavLink className="nav-link" to="/search">Pesquisar</NavLink>
+            <NavLink className="nav-link" to="/fansubs">Fansubs</NavLink>
             <NavLink className="nav-link" to="/about">Sobre</NavLink>
           </Nav>
         </Navbar.Collapse>

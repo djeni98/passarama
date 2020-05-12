@@ -7,6 +7,7 @@ import {
 import Home from './components/Home';
 import About from './components/About';
 import Search from './components/Search';
+import Fansubs from './components/Fansubs';
 import NotFound from './components/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -17,6 +18,7 @@ function App() {
         <Switch>
           <Route path="/about" component={About} />
           <Route path="/search" component={Search} />
+          <Route path="/fansubs" component={Fansubs} />
           <Route path="/" exact component={Home} />
           <Route path="/" component={NotFound} />
         </Switch>

@@ -44,6 +44,25 @@ h1 {
   justify-content: center;
 }
 
+.p-15px {
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.chip {
+  width: 100%;
+  height: 40px;
+  border-radius: 20px;
+  padding: 0 15px;
+
+  font-weight: bold;
+}
+
+/** Card Border **/
+.orange-border {
+  border: 2px solid rgba(255, 115, 53, 0.50);
+}
+
 /** Orange Button **/
 button {
   background-color: #FF7335;

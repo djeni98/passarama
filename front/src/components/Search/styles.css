@@ -3,21 +3,3 @@
   padding-top: 25px;
   padding-bottom: 25px;
 }
-
-.orange-border {
-  border: 2px solid rgba(255, 115, 53, 0.50);
-}
-
-.p-15px {
-  padding-bottom: 15px;
-  padding-top: 15px;
-}
-
-.chip {
-  width: 100%;
-  height: 40px;
-  border-radius: 20px;
-  padding: 0 15px;
-
-  font-weight: bold;
-}

@@ -20,6 +20,7 @@ export default function Footer() {
         <Col className="navbar-nav align-items-center">
           <NavLink className="nav-link" exact to="/">Início</NavLink>
           <NavLink className="nav-link" to="/search">Pesquisar</NavLink>
+          <NavLink className="nav-link" to="/fansubs">Fansubs</NavLink>
           <NavLink className="nav-link" to="/about">Sobre</NavLink>
         </Col>
       </Row>
