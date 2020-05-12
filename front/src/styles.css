@@ -69,6 +69,13 @@ button:hover {
   font-size: 22px;
 }
 
+/** Images Size **/
+
+.img-w100 {
+  width: 100%;
+  max-width: 600px;
+}
+
 /** Logo **/
 
 .logo-font {
@@ -110,4 +117,3 @@ h1.logo-font {
 .footer {
   margin-top: auto;
 }
-

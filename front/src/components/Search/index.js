@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
+
+import noResultsImg from '../../assets/no-results.svg';
 
 import api from '../api';
 import SearchBar from '../SearchBar';
@@ -19,9 +21,16 @@ export default function SearchPage () {
   const [searchValue, setSearchValue] = useState('');
   const [noResults, setNoResults] = useState(false);
 
-  function getDorama(value, mais = false) {
+  const [loading, setLoading] = useState(false)
+  const [loadingMore, setLoadingMore] = useState(false)
+
+  function getDorama(value, more = false) {
+    if (loading || loadingMore) { return; }
+    const funct = more ? setLoadingMore : setLoading;
+    funct(true)
+
     let params =  { limit: 20 };
-    if (mais) {
+    if (more) {
       params.offset = offset + 20
     }
     if (value) {
@@ -31,7 +40,7 @@ export default function SearchPage () {
     setSearchValue(value);
     api.get('doramas', { params })
       .then(response => {
-        if (mais) {
+        if (more) {
           setDoramas([...doramas, ...response.data]);
           setOffset(offset + 20);
         } else {
@@ -39,6 +48,8 @@ export default function SearchPage () {
           setTotal(response.headers['x-total-count']);
           setNoResults(!response.headers['x-total-count']);
         }
+
+        funct(false);
       })
   }
 
@@ -64,7 +75,17 @@ export default function SearchPage () {
         </Row>
       </Container>
 
-      { total ? (
+      { loading ? (
+        <Container>
+          <Row>
+            <Col>
+              <h2 className="text-center">Carregando...</h2>
+            </Col>
+          </Row>
+        </Container>
+      ) : null }
+
+      { total && !loading ? (
         <Container className="mb-5">
           <Row className="mb-3">
             <Col>
@@ -94,7 +115,13 @@ export default function SearchPage () {
                 lg={{span: 6, offset: 3}}
               >
                 <button className="chip" onClick={() => getDorama(searchValue, true)}>
-                  Mais Resultados
+                  { loadingMore ? (
+                    <Spinner
+                      as="span" animation="border"
+                      aria-hidden="true" size="sm"
+                      variant="light" role="status"
+                    />
+                  ) : 'Mais Resultados' }
                 </button>
               </Col>
             </Row>
@@ -102,10 +129,15 @@ export default function SearchPage () {
         </Container>
       ) : null }
 
-      { noResults ? (
-        <Container className="mb-5">
-          <Row className="justify-content-center">
-            <h1>Nenhum resultado foi encontrado</h1>
+      { noResults && !loading ? (
+        <Container className="mb-7">
+          <Row xs={1}>
+            <Col>
+              <h2 className="mb-5 text-center">Nenhum resultado foi encontrado</h2>
+            </Col>
+            <Col className="center">
+              <img src={noResultsImg} className="img-w100" alt="Nenhum resultado encontrado"/>
+            </Col>
           </Row>
         </Container>
       ) : null }

@@ -10,7 +10,9 @@ export default function Footer() {
     <Container fluid className="footer">
       <Row className="align-items-center navbar-dark" xs={1} md={2}>
         <Col className="d-flex justify-content-center">
-          <h2 className="logo-font">Passarama</h2>
+          <NavLink exact to="/" className="nav-link text-white">
+            <h2 className="logo-font">Passarama</h2>
+          </NavLink>
         </Col>
         <Col className="d-block d-md-none">
           <hr />
