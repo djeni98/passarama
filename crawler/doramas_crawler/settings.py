@@ -15,7 +15,7 @@ SPIDER_MODULES = ['doramas_crawler.spiders']
 NEWSPIDER_MODULE = 'doramas_crawler.spiders'
 
 DATABASE_NAME='test-dev.sqlite'
-LOG_LEVEL='INFO'
+# LOG_LEVEL='INFO'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'doramas_crawler (+http://www.yourdomain.com)'
