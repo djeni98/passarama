@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import './styles.css';
 
-export default function SearchBar(props) {
+function SearchBar(props) {
   const [value, setValue] = useState(props.value || '');
 
   const callback = props.callback || console.log;
@@ -32,3 +33,10 @@ export default function SearchBar(props) {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  value: PropTypes.string,
+  callback: PropTypes.func
+}
+
+export default SearchBar;

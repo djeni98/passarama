@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { NavLink } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
@@ -7,7 +8,7 @@ import logoImg from '../../assets/passarinho.svg';
 
 import './styles.css';
 
-export default function Header(props) {
+function Header(props) {
   let className = props.className || '';
   className += " bg-yellow"
   className = className.trim();
@@ -40,3 +41,10 @@ export default function Header(props) {
     </Container>
   );
 }
+
+Header.propTypes = {
+  className: PropTypes.string,
+  hideLogo: PropTypes.bool
+}
+
+export default Header;
