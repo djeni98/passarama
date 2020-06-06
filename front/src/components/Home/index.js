@@ -1,16 +1,23 @@
 import React from 'react';
 
-import './styles.css';
+import { useHistory } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import logoImg from '../../assets/passarinho.svg';
 import procurarImg from '../../assets/procurar.svg';
 
-import { Container, Row, Col } from 'react-bootstrap';
+import './styles.css';
 
 import SearchBar from '../SearchBar';
 import Footer from '../Footer';
 
 export default function Home() {
+  const history = useHistory();
+
+  function navigateToSearch(searchValue) {
+    history.push('/search', searchValue);
+  }
+
   return (
     <>
       <Container fluid className="header-main mb-7">
@@ -31,7 +38,7 @@ export default function Home() {
         <Row>
           <Col />
           <Col sm={10} md={8}>
-            <SearchBar />
+            <SearchBar callback={navigateToSearch} />
           </Col>
           <Col />
         </Row>

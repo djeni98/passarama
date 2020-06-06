@@ -1,26 +1,15 @@
 import React, { useState } from 'react';
 
-import { useHistory, useLocation } from 'react-router-dom';
-
 import './styles.css';
 
-export default function SearchBar (props) {
+export default function SearchBar(props) {
   const [value, setValue] = useState(props.value || '');
 
-  const location = useLocation();
-  const history = useHistory();
-
-  function handleClick() {
-    if (!location.pathname.includes('search')) {
-      history.push('/search', value);
-    } else {
-      props.runFunction(value);
-    }
-  }
+  const callback = props.callback || console.log;
 
   function checkEnterKey(event) {
     if (event.key === 'Enter') {
-      handleClick();
+      callback(value);
     }
   }
 
@@ -30,12 +19,13 @@ export default function SearchBar (props) {
         className="search-input"
         placeholder="Pesquise..."
         value={value}
+        type="text"
         onChange={e => setValue(e.target.value)}
         onKeyPress={checkEnterKey}
       />
       <button
           className="search-button"
-          onClick={handleClick}
+          onClick={() => callback(value)}
       >
         <span className="material-icons">search</span>
       </button>

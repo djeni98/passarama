@@ -69,7 +69,7 @@ export default function SearchPage () {
         <Row>
           <Col />
           <Col sm={10} md={8}>
-            <SearchBar value={query} runFunction={getDorama} />
+            <SearchBar value={query} callback={getDorama} />
           </Col>
           <Col />
         </Row>
