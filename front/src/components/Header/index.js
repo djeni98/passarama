@@ -14,7 +14,7 @@ function Header(props) {
   className = className.trim();
 
   return (
-    <Container fluid className={className} >
+    <Container fluid className={className} as="header">
       <Navbar expand="md" className="container">
         <NavLink exact to="/">
           <Navbar.Brand>
