@@ -2,24 +2,28 @@ import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react';
 import SearchBar from './index.js';
 
-test('renders search bar', () => {
-  render(<SearchBar callback={console.log} />)
+function setup(props) {
+  render(<SearchBar callback={console.log} {...props} />)
 
   const input = screen.getByRole('textbox');
   const button = screen.getByRole('button');
+
+  return { input, button }
+}
+
+test('renders search bar', () => {
+  const { input, button } = setup();
 
   expect(input).toBeInTheDocument();
   expect(button).toBeInTheDocument();
 });
 
 test('return value on button click', () => {
-  let searchValue = null;
   const searchInput = 'my search';
 
-  render(<SearchBar callback={(value) => searchValue = value} />);
-
-  const input = screen.getByRole('textbox');
-  const button = screen.getByRole('button');
+  let searchValue = null;
+  const callback = (value) => searchValue = value;
+  const { input, button } = setup({ callback });
 
   fireEvent.change(input, { target: { value: searchInput } });
   fireEvent.click(button);
@@ -29,12 +33,11 @@ test('return value on button click', () => {
 });
 
 test('return value on press Enter', () => {
-  let searchValue = null;
   const searchInput = 'my search';
 
-  render(<SearchBar callback={(value) => searchValue = value} />);
-
-  const input = screen.getByRole('textbox');
+  let searchValue = null;
+  const callback = (value) => searchValue = value;
+  const { input } = setup({ callback });
 
   fireEvent.change(input, { target: { value: searchInput } });
   // Key press need to receive code

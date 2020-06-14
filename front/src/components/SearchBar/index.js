@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 function SearchBar(props) {
-  const [value, setValue] = useState(props.value || '');
+  const [value, setValue] = useState(props.value);
 
-  const callback = props.callback || console.log;
+  const callback = props.callback;
 
   function checkEnterKey(event) {
     if (event.key === 'Enter') {
@@ -36,7 +36,11 @@ function SearchBar(props) {
 
 SearchBar.propTypes = {
   value: PropTypes.string,
-  callback: PropTypes.func
+  callback: PropTypes.func.isRequired
+}
+
+SearchBar.defaultProps = {
+  value: ''
 }
 
 export default SearchBar;

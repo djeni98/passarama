@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <Container fluid className="footer">
+    <Container fluid className="footer" as="footer">
       <Row className="align-items-center navbar-dark" xs={1} md={2}>
         <Col className="d-flex justify-content-center">
           <NavLink exact to="/" className="nav-link text-white">
