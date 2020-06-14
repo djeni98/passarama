@@ -13,21 +13,18 @@ function Header(props) {
   className += " bg-yellow"
   className = className.trim();
 
-  const showLogo = props.hideLogo ? false : true;
   return (
     <Container fluid className={className} >
       <Navbar expand="md" className="container">
-        { showLogo ? (
-          <NavLink exact to="/">
-            <Navbar.Brand>
-              <img
-                height={50}
-                src={logoImg}
-                alt="Logo - Passarama"
-              />
-            </Navbar.Brand>
-          </NavLink>
-        ) : null }
+        <NavLink exact to="/">
+          <Navbar.Brand>
+            <img
+              height={50}
+              src={logoImg}
+              alt="Logo - Passarama"
+            />
+          </Navbar.Brand>
+        </NavLink>
 
         <Navbar.Collapse id="navbar-id">
           <Nav className="ml-auto">
@@ -44,7 +41,10 @@ function Header(props) {
 
 Header.propTypes = {
   className: PropTypes.string,
-  hideLogo: PropTypes.bool
+}
+
+Header.defaultProps = {
+  className: '',
 }
 
 export default Header;
