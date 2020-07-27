@@ -48,7 +48,7 @@ export default function Fansubs() {
       </Container>
 
       { loading ? (
-        <Container>
+        <Container className="mb-5">
           <Row>
             <Col>
               <h2 className="text-center">Carregando...</h2>
@@ -95,7 +95,9 @@ export default function Fansubs() {
                       as="span" animation="border"
                       aria-hidden="true" size="sm"
                       variant="light" role="status"
-                    />
+                    >
+                      <span className="sr-only">Carregando...</span>
+                    </Spinner>
                   ) : 'Mais Resultados' }
                 </button>
               </Col>

@@ -29,7 +29,7 @@ export default function SearchPage () {
     const funct = more ? setLoadingMore : setLoading;
     funct(true)
 
-    let params =  { limit: 20 };
+    let params =  { limit: 20, offset };
     if (more) {
       params.offset = offset + 20
     }
@@ -120,7 +120,9 @@ export default function SearchPage () {
                       as="span" animation="border"
                       aria-hidden="true" size="sm"
                       variant="light" role="status"
-                    />
+                    >
+                      <span className="sr-only">Carregando...</span>
+                    </Spinner>
                   ) : 'Mais Resultados' }
                 </button>
               </Col>

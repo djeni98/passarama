@@ -1,2 +1,14 @@
-**/__pycache__/
-**/node_modules/
+__pycache__/
+node_modules/
+
+# Python virtual environment
+venv/
+
+# Crawler login information
+logindata.py
+
+# Databases
+*.sqlite
+
+# Testing
+coverage
