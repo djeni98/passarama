@@ -1,9 +1,10 @@
 # coding: utf-8
 import os
-from flask import Flask, request
+from flask import Flask
 
 from passarama_api import db
-from passarama_api.views import get_fansubs, get_doramas
+from passarama_api.views import get_fansubs, get_doramas, get_routes
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -31,5 +32,6 @@ def create_app(test_config=None):
     # Add routes
     app.add_url_rule('/fansubs', 'fansubs', get_fansubs)
     app.add_url_rule('/doramas', 'doramas', get_doramas)
+    app.add_url_rule('/routes', 'routes', get_routes)
 
     return app
