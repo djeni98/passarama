@@ -3,7 +3,7 @@ import os
 from flask import Flask, request
 
 from passarama_api import db
-from passarama_api.views import get_fansubs
+from passarama_api.views import get_fansubs, get_doramas
 
 def create_app(test_config=None):
     # create and configure the app
@@ -30,5 +30,6 @@ def create_app(test_config=None):
 
     # Add routes
     app.add_url_rule('/fansubs', 'fansubs', get_fansubs)
+    app.add_url_rule('/doramas', 'doramas', get_doramas)
 
     return app
