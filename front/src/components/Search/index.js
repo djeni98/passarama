@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 
 import noResultsImg from '../../assets/no-results.svg';
+
+import { queryString } from '../utils';
 
 import api from '../api';
 import SearchBar from '../SearchBar';
@@ -29,9 +31,9 @@ export default function SearchPage () {
     const funct = more ? setLoadingMore : setLoading;
     funct(true)
 
-    let params =  { limit: 20, offset };
+    let params =  { limit: 12, offset };
     if (more) {
-      params.offset = offset + 20
+      params.offset = offset + 12
     }
     if (value) {
       params.title = value
@@ -44,7 +46,7 @@ export default function SearchPage () {
         const results = response.data.results;
         if (more) {
           setDoramas([...doramas, ...results]);
-          setOffset(offset + 20);
+          setOffset(offset + 12);
         } else {
           setDoramas(results);
           setTotal(totalCount);
@@ -56,14 +58,19 @@ export default function SearchPage () {
   }
 
   const location = useLocation();
-  const query = location.state;
+  const { title } = queryString(location.search);
 
   useEffect(() => {
-    if (query !== undefined) {
-      getDorama(query);
+    if (title !== null || title !== undefined) {
+      getDorama(title);
     }
   // eslint-disable-next-line
-  }, [query]);
+  }, [title]);
+
+  const history = useHistory();
+  function changeSearch(value) {
+    history.push('/search?title='+value);
+  }
 
   return (
     <>
@@ -71,7 +78,7 @@ export default function SearchPage () {
         <Row>
           <Col />
           <Col sm={10} md={8}>
-            <SearchBar value={query} callback={getDorama} />
+            <SearchBar value={title} callback={changeSearch} />
           </Col>
           <Col />
         </Row>

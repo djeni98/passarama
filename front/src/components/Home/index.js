@@ -15,7 +15,7 @@ export default function Home() {
   const history = useHistory();
 
   function navigateToSearch(searchValue) {
-    history.push('/search', searchValue);
+    history.push(`/search?title=${searchValue}`);
   }
 
   return (
