@@ -40,13 +40,15 @@ export default function SearchPage () {
     setSearchValue(value);
     api.get('doramas', { params })
       .then(response => {
+        const totalCount = response.data.total;
+        const results = response.data.results;
         if (more) {
-          setDoramas([...doramas, ...response.data]);
+          setDoramas([...doramas, ...results]);
           setOffset(offset + 20);
         } else {
-          setDoramas(response.data);
-          setTotal(response.headers['x-total-count']);
-          setNoResults(!response.headers['x-total-count']);
+          setDoramas(results);
+          setTotal(totalCount);
+          setNoResults(!totalCount);
         }
 
         funct(false);

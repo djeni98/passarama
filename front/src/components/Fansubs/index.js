@@ -22,8 +22,11 @@ export default function Fansubs() {
     const params = { limit: 10, offset }
     api.get('fansubs', { params })
       .then(response => {
-        setFansubs(prevFansubs => [...prevFansubs, ...response.data]);
-        setTotal(response.headers['x-total-count']);
+        const totalCount = response.data.total;
+        const results = response.data.results;
+
+        setFansubs(prevFansubs => [...prevFansubs, ...results]);
+        setTotal(totalCount);
 
         setLoading(false);
         setLoadingMore(false);

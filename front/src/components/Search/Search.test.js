@@ -20,14 +20,13 @@ function createData(items) {
 
 function mockGet(data = [], error = false) {
   api.get.mockImplementationOnce((url, { params }) => {
-    const headers = { 'x-total-count': data.length };
     const start = params.offset || 0;
     const end = start + params.limit;
 
     if (error) {
       return Promise.reject({ error: 'some error' });
     }
-    return Promise.resolve({ headers, data: data.slice(start, end) });
+    return Promise.resolve({ data: { total: data.length, results: data.slice(start, end) } });
   });
 
 }
