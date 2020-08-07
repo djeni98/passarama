@@ -17,6 +17,6 @@ fansub que não estão presentes no banco de dados.
 
 ## Tecnologias e Ferramentas
 
-* Crawler: Python e Scrapy
-* Back-end: Python, Flask e SQLite
-* Front-end: React e React-Bootstrap
+* [Crawler](crawler/README-PT.md): Python e Scrapy
+* [Back-end](back/README-PT.md): Python, Flask e SQLite
+* [Front-end](front/README-PT.md): React e React-Bootstrap

@@ -15,6 +15,6 @@ database.
 
 ## Technologies and Tools
 
-* Crawler: Python and Scrapy
-* Back-end: Python, Flask and SQLite
-* Front-end: React and React-Bootstrap
+* [Crawler](crawler/README.md): Python and Scrapy
+* [Back-end](back/README.md): Python, Flask and SQLite
+* [Front-end](front/README.md): React and React-Bootstrap

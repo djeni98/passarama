@@ -1,37 +1,37 @@
 # Passarama - Front-end
 
-## Install
+## Instalação
 
-Clone the repository:
+Clone o repositório:
 ```sh
 $ git clone https://github.com/djeni98/passarama
 $ cd front
 ```
 
-Install dependencies:
+Instale as dependências:
 ```sh
 $ npm install
 ```
 
-## Run
+## Execução
 
 ```sh
 $ npm start
 ```
-Open http://127.0.0.1:3000 in a browser.
+Abra http://127.0.0.1:3000 em um navegador.
 
-## Test
+## Teste
 
 ```sh
 $ npm run test
 ```
 
-Run with coverage report:
+Execute com o relatório de cobertura:
 ```sh
-$ npm run coverage # open coverage/lcov-report/index.html in a browser
+$ npm run coverage # abra coverage/lcov-report/index.html em um navegador
 ```
 
-## Technologies and Tools
+## Tecnologias e Ferramentas
 
 * [React](https://reactjs.org/) ```16.13.1```
 * [React-Bootstrap](https://react-bootstrap.github.io/) ```1.0.1```
