@@ -4,6 +4,9 @@ node_modules/
 # Python virtual environment
 venv/
 
+# Build
+instance/
+
 # Crawler login information
 logindata.py
 
@@ -11,4 +14,13 @@ logindata.py
 *.sqlite
 
 # Testing
-coverage
+.coverage
+coverage/
+htmlcov/
+
+*.egg
+*.egg-info/
+
+# Temporary Files
+*.swp
+*~
