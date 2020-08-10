@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-
 import { useHistory, useLocation } from 'react-router-dom';
-
 import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 
 import noResultsImg from '../../assets/no-results.svg';
 
-import { queryString } from '../utils';
-
 import api from '../api';
-import SearchBar from '../SearchBar';
+import { queryString, getMessageAndImageFromError } from '../utils';
 
+import SearchBar from '../SearchBar';
 import Footer from '../Footer';
+import ErrorDisplayer from '../ErrorDisplayer';
 
 import './styles.css';
 
@@ -24,7 +22,9 @@ export default function SearchPage () {
   const [noResults, setNoResults] = useState(false);
 
   const [loading, setLoading] = useState(false)
-  const [loadingMore, setLoadingMore] = useState(false)
+  const [loadingMore, setLoadingMore] = useState(false);
+
+  const [error, setError] = useState('');
 
   function getDorama(value, more = false) {
     if (loading || loadingMore) { return; }
@@ -54,7 +54,11 @@ export default function SearchPage () {
         }
 
         funct(false);
-      })
+        setError(null);
+      }).catch(error => {
+        funct(false);
+        setError(getMessageAndImageFromError(error));
+      });
   }
 
   const location = useLocation();
@@ -94,7 +98,7 @@ export default function SearchPage () {
         </Container>
       ) : null }
 
-      { total && !loading ? (
+      { total && !loading && !error ? (
         <Container className="mb-5">
           <Row className="mb-3">
             <Col>
@@ -116,6 +120,7 @@ export default function SearchPage () {
               ))
             }
           </Row>
+
           { doramas.length < total ? (
             <Row>
               <Col
@@ -140,7 +145,7 @@ export default function SearchPage () {
         </Container>
       ) : null }
 
-      { noResults && !loading ? (
+      { noResults && !loading && !error ? (
         <Container className="mb-7">
           <Row xs={1}>
             <Col>
@@ -152,6 +157,8 @@ export default function SearchPage () {
           </Row>
         </Container>
       ) : null }
+
+      { error && !loading ? <ErrorDisplayer {...error} /> : null }
 
       <Footer />
     </>

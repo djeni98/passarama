@@ -31,12 +31,12 @@ function mockGet(data = [], error = false) {
 
 }
 
-function setup(search = null) {
+function setup(search = '', data = [], error = false) {
   const history = createMemoryHistory();
 
-  if (search) {
-    history.push('/search', search);
-  }
+  mockGet(data, error);
+
+  history.push('/search?title=' + search);
 
   const { container } = render(
     <Router history={history}>
@@ -44,7 +44,7 @@ function setup(search = null) {
     </Router>
   );
 
-  return { history, container };
+  return { history, container, data };
 }
 
 test('renders search page with no query', async () => {
@@ -60,14 +60,11 @@ test('renders search page with no query', async () => {
   expect(button).toBeInTheDocument();
 
   expect(footer).toBeInTheDocument();
+  await screen.findByRole('heading', { name: /resultado/i });
 });
 
 test('renders search page', async () => {
-  const data = createData(40);
-
-  mockGet(data);
-
-  setup('search');
+  const { data } = setup('search', createData(40));
 
   const loading = screen.getByRole('heading', { name: /carregando/i });
   
@@ -103,12 +100,8 @@ test('renders search page', async () => {
 });
 
 test('loadMore button click loads more data', async () => {
-  const data = createData(40);
+  const { container, data } = setup('search', createData(40));
 
-  mockGet(data);
-
-  const { container } = setup('search');
-  
   const loadMoreButton = await screen.findByRole('button', { name: /resultado/i });
 
   let offset = 0;
@@ -135,3 +128,24 @@ test('loadMore button click loads more data', async () => {
   );
 });
 
+test('first search load error', async () => {
+  setup('', [], true);
+
+  await waitForElementToBeRemoved(() => screen.queryByText(/carregando/i));
+
+  expect(screen.queryByText(/resultado/i)).not.toBeInTheDocument();
+  expect(screen.getByText(/erro/i)).toBeInTheDocument();
+});
+
+test('loadMore load error', async () => {
+  setup('search', createData(40));
+  const loadMoreButton = await screen.findByRole('button', { name: /resultado/i });
+
+  mockGet([], true);
+  fireEvent.click(loadMoreButton);
+
+  await waitForElementToBeRemoved(() => screen.queryByText(/carregando/i));
+
+  expect(screen.queryByText(/resultado/i)).not.toBeInTheDocument();
+  expect(screen.getByText(/erro/i)).toBeInTheDocument();
+});

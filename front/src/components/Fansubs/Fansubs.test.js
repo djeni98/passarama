@@ -23,7 +23,7 @@ function mockGet(data = [], error = false) {
     const end = start + params.limit;
 
     if (error) {
-      return Promise.reject({ error: 'some error' });
+      return Promise.reject({ message: 'some error' });
     }
     return Promise.resolve({ data: { total: data.length, results: data.slice(start, end) } });
   });
@@ -119,5 +119,6 @@ test('load error', async () => {
   const { container } = render(<Fansubs />, { wrapper: MemoryRouter });
   await waitForElementToBeRemoved(() => screen.queryByText(/carregando/i));
 
-  // TODO: Handle errors
+  expect(screen.queryByText(/resultado/i)).not.toBeInTheDocument();
+  expect(screen.getByText(/erro/i)).toBeInTheDocument();
 });

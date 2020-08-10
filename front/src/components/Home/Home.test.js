@@ -49,7 +49,7 @@ test('navigates to search with no search content', () => {
   
   fireEvent.click(searchButton);
   expect(history.location.pathname).toBe('/search');
-  expect(history.location.state).toBe('');
+  expect(history.location.search).toMatch(/=$/);
 });
 
 test('navigates to search with search content', () => {
@@ -62,5 +62,5 @@ test('navigates to search with search content', () => {
   fireEvent.click(searchButton);
 
   expect(history.location.pathname).toBe('/search');
-  expect(history.location.state).toBe(searchValue);
+  expect(history.location.search).toMatch('='+searchValue);
 });

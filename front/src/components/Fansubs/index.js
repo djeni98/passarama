@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-
 import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 
 import api from '../api';
+import { getMessageAndImageFromError } from '../utils';
 
 import Header from '../Header';
 import Footer from '../Footer';
+import ErrorDisplayer from '../ErrorDisplayer';
 
 export default function Fansubs() {
   const [fansubs, setFansubs] = useState([]);
@@ -14,6 +15,8 @@ export default function Fansubs() {
 
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+
+  const [error, setError] = useState(null);
 
   // Get More Results
   useEffect(() => {
@@ -28,10 +31,11 @@ export default function Fansubs() {
         setFansubs(prevFansubs => [...prevFansubs, ...results]);
         setTotal(totalCount);
 
+        setError(null);
         setLoading(false);
         setLoadingMore(false);
       }).catch(error => {
-        console.error(error);
+        setError(getMessageAndImageFromError(error));
 
         setLoading(false);
         setLoadingMore(false);
@@ -60,7 +64,7 @@ export default function Fansubs() {
         </Container>
       ) : null }
 
-      { total && !loading ? (
+      { total && !loading && !error ? (
         <Container className="mb-5">
           <Row className="mb-3">
             <Col>
@@ -108,6 +112,8 @@ export default function Fansubs() {
           ) : null }
         </Container>
       ) : null }
+
+      { error && !loading ? <ErrorDisplayer {...error} /> : null }
 
       <Footer />
     </>
