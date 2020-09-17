@@ -20,6 +20,7 @@ def get_fansubs():
     r = query_db('''
         SELECT spider, name, link, image, facebook FROM fansub
         WHERE UPPER(name) LIKE UPPER(?)
+        ORDER BY name
         LIMIT ? OFFSET ?
     ''', (name_pattern, limit, offset))
 

@@ -29,6 +29,7 @@ def get_doramas():
         WHERE
             UPPER(dorama.title) LIKE UPPER(?) AND
             UPPER(fansub.name) LIKE UPPER(?)
+        ORDER BY title
         LIMIT ? OFFSET ?
     ''', (title_pattern, fansub_pattern, limit, offset))
 
