@@ -9,7 +9,10 @@ settings = get_project_settings()
 process = CrawlerProcess(settings)
 spider_loader = process.spider_loader
 
-spiders = [ spider_loader.load(spider) for spider in spider_loader.list() ]
+inactive = ['yumeko']
+
+spiders = [ spider_loader.load(spider) for spider in spider_loader.list() if spider not in inactive ]
+
 create_database_tables(spiders, settings['DATABASE_NAME'])
 
 for spider in spiders:
