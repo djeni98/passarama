@@ -60,7 +60,8 @@ h1 {
 
 /** Card Border **/
 .orange-border {
-  border: 2px solid rgba(255, 115, 53, 0.50);
+  /* border: 2px solid rgba(255, 115, 53, 0.50); */
+  border: 2px solid #ffb899;
 }
 
 /** Orange Button **/
