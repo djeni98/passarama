@@ -73,6 +73,7 @@ export default function SearchPage () {
 
   const history = useHistory();
   function changeSearch(value) {
+    setOffset(0);
     history.push('/search?title='+value);
   }
 

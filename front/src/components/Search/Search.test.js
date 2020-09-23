@@ -5,6 +5,8 @@ import { Router } from 'react-router-dom';
 import { render, screen, fireEvent, waitForElementToBeRemoved, waitFor } from '@testing-library/react';
 import SearchPage from './index.js';
 
+const LIMIT = 12
+
 jest.mock('../api');
 
 function createData(items) {
@@ -79,8 +81,7 @@ test('renders search page', async () => {
 
   // Default
   const offset = 0;
-  const limit = 10;
-  const partialData = data.slice(offset, limit);
+  const partialData = data.slice(offset, LIMIT);
 
   partialData.forEach(item => {
     const title = screen.getByText(item.title);
@@ -105,8 +106,7 @@ test('loadMore button click loads more data', async () => {
   const loadMoreButton = await screen.findByRole('button', { name: /resultado/i });
 
   let offset = 0;
-  const limit = 10;
-  let partialData = data.slice(offset, offset+limit);
+  let partialData = data.slice(offset, offset+LIMIT);
 
   partialData.forEach(item =>
     expect(screen.getByText(item.title)).toBeInTheDocument()
@@ -120,8 +120,8 @@ test('loadMore button click loads more data', async () => {
 
   await waitForElementToBeRemoved(() => screen.queryByText(/carregando/i));
 
-  offset += limit;
-  partialData = data.slice(offset, offset+limit);
+  offset += LIMIT;
+  partialData = data.slice(offset, offset+LIMIT);
 
   partialData.forEach(item =>
     expect(screen.getByText(item.title)).toBeInTheDocument()
