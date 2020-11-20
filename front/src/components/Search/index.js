@@ -7,6 +7,7 @@ import noResultsImg from '../../assets/no-results.svg';
 import api from '../api';
 import { queryString, getMessageAndImageFromError } from '../utils';
 
+import Header from '../Header';
 import SearchBar from '../SearchBar';
 import Footer from '../Footer';
 import ErrorDisplayer from '../ErrorDisplayer';
@@ -79,7 +80,9 @@ export default function SearchPage () {
 
   return (
     <>
-      <Container fluid className="header-search mb-5">
+      <Header hideLogo className="d-none d-md-block" />
+      <Container fluid className="bg-yellow pb-25px d-block d-md-none" />
+      <Container fluid className="bg-yellow pb-25px mb-5">
         <Row>
           <Col />
           <Col sm={10} md={8}>

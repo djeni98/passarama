@@ -8,6 +8,7 @@ import procurarImg from '../../assets/procurar.svg';
 
 import './styles.css';
 
+import Header from '../Header';
 import SearchBar from '../SearchBar';
 import Footer from '../Footer';
 
@@ -20,6 +21,8 @@ export default function Home() {
 
   return (
     <>
+      <Header hideLogo className="d-none d-md-block" />
+
       <Container fluid className="header-main mb-7">
         <Row>
           <Col xs={12} sm={1} md={2}/>

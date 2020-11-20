@@ -9,22 +9,26 @@ import logoImg from '../../assets/passarinho.svg';
 import './styles.css';
 
 function Header(props) {
-  let className = props.className || '';
+  let className = props.className;
   className += " bg-yellow"
   className = className.trim();
+
+  const hideLogo = props.hideLogo;
 
   return (
     <Container fluid className={className} as="header">
       <Navbar expand="md" className="container">
-        <NavLink exact to="/">
-          <Navbar.Brand>
-            <img
-              height={50}
-              src={logoImg}
-              alt="Logo - Passarama"
-            />
-          </Navbar.Brand>
-        </NavLink>
+        { hideLogo ? <div style={{height: 'calc(50px + 0.625rem)'}} /> : (
+          <NavLink exact to="/">
+            <Navbar.Brand>
+              <img
+                height={50}
+                src={logoImg}
+                alt="Logo - Passarama"
+              />
+            </Navbar.Brand>
+          </NavLink>
+        ) }
 
         <Navbar.Collapse id="navbar-id">
           <Nav className="ml-auto">
@@ -40,10 +44,12 @@ function Header(props) {
 }
 
 Header.propTypes = {
+  hideLogo: PropTypes.bool,
   className: PropTypes.string,
 }
 
 Header.defaultProps = {
+  hideLogo: false,
   className: '',
 }
 
