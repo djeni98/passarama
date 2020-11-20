@@ -26,7 +26,7 @@ class DorameirasOnSpider(scrapy.Spider):
         items = response.xpath('//h2/a | //h2/a/span/parent::* | //h2/span/a')
 
         announcement = response.xpath('//strong[contains(text(), "Anúncio")]').getall()
-        if announcement:
+        for i in announcement:
             items.pop(0)
 
         for i in items:
