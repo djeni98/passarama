@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import api from '../api';
 
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -18,6 +20,9 @@ export default function Home() {
   function navigateToSearch(searchValue) {
     history.push(`/search?title=${searchValue}`);
   }
+
+  // Ping
+  useEffect(() => api.get('').then(() => {}).catch(() => {}), []);
 
   return (
     <>
