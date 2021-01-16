@@ -22,7 +22,7 @@ export default function Home() {
   }
 
   // Ping
-  useEffect(() => api.get('').then(() => {}).catch(() => {}), []);
+  useEffect(() => { api.get('').then(() => {}).catch(() => {}) }, []);
 
   return (
     <>
