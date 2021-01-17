@@ -1,4 +1,6 @@
 import sqlite3
+from datetime import date
+
 
 def dorama_table(database):
     conn = sqlite3.connect(database)
@@ -17,6 +19,7 @@ def dorama_table(database):
     )
     conn.commit()
     conn.close()
+
 
 def fansub_table(spiders, database):
     conn = sqlite3.connect(database)
@@ -54,6 +57,26 @@ def fansub_table(spiders, database):
     conn.commit()
     conn.close()
 
+
+def status_table(database):
+    conn = sqlite3.connect(database)
+    c = conn.cursor()
+
+    c.execute('DROP TABLE IF EXISTS status')
+    c.execute('''
+        CREATE TABLE status (
+            last_update TEXT
+        )'''
+    )
+    c.execute('''
+        INSERT INTO status (last_update)
+        VALUES (?)''', (date.today().isoformat(),))
+
+    conn.commit()
+    conn.close()
+
+
 def create_database_tables(spiders, database):
     dorama_table(database)
     fansub_table(spiders, database)
+    status_table(database)
