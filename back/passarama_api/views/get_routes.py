@@ -4,6 +4,17 @@ from passarama_api.headers import Headers
 
 def get_routes():
     base_url = request.url_root
+
+    info = {
+        'url': f'{base_url}info',
+        'methods': ['GET'],
+        'description': "Get api version and database last update",
+        'response': {
+            'api_version': "string",
+            'db_last_update': "string",
+        }
+    }
+
     route_schema = {
         'url': "string",
         'methods': "string[]",
@@ -15,6 +26,7 @@ def get_routes():
         'methods': ['GET'],
         'description': "List available routes in this api",
         'response': {
+            'info': route_schema,
             'routes': route_schema,
             'doramas': dict(**route_schema, query_params="string[]"),
             'fansubs': dict(**route_schema, query_params="string[]")
@@ -54,6 +66,7 @@ def get_routes():
     }
 
     return jsonify({
+        'info': info,
         'routes': routes,
         'doramas': doramas,
         'fansubs': fansubs

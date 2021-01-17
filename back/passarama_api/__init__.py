@@ -3,7 +3,9 @@ import os
 from flask import Flask
 
 from passarama_api import db, errors
-from passarama_api.views import get_fansubs, get_doramas, get_routes
+from passarama_api.views import (
+    get_fansubs, get_doramas, get_routes, get_info
+)
 
 
 def create_app(test_config=None):
@@ -33,6 +35,11 @@ def create_app(test_config=None):
     app.add_url_rule('/fansubs', 'fansubs', get_fansubs)
     app.add_url_rule('/doramas', 'doramas', get_doramas)
     app.add_url_rule('/routes', 'routes', get_routes)
+
+    with open(os.path.join(os.path.dirname(__file__), 'VERSION'), 'r') as f:
+        version = f.read().strip()
+
+    app.add_url_rule('/info', 'info', lambda: get_info(version))
 
     # Add error handlers
     errors.add_handlers(app)

@@ -3,6 +3,8 @@ import tempfile
 
 import pytest
 
+from datetime import date
+
 from passarama_api import create_app
 from passarama_api.db import get_db
 
@@ -55,6 +57,13 @@ def app():
                     (?, ?, 1),
                     (?, ?, 2);
             ''', values)
+        db.commit()
+
+        db.execute('CREATE TABLE status (last_update TEXT)')
+        db.execute(
+            'INSERT INTO status (last_update) VALUES (?)',
+            (date.today().isoformat(),)
+        )
         db.commit()
 
     yield app
