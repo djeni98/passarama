@@ -22,3 +22,8 @@ export function getMessageAndImageFromError(error) {
 
   return err;
 }
+
+export function toBRDate(isoFormat) {
+  const dateString = isoFormat.split('T')[0];
+  return dateString.split('-').reverse().join('/');
+}
