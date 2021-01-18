@@ -2,3 +2,13 @@
   padding-right: 1.5rem;
   padding-left: 1.5rem;
 }
+
+.dropdown-item:focus, .dropdown-item:active {
+  color: #fff;
+  background-color: var(--dark);
+}
+
+.dropdown-menu {
+  /* Fix rgba problem in dropdown border */
+  border-color: #d9d9d9;
+}

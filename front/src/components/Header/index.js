@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { NavLink } from 'react-router-dom';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { NavLink, Link } from 'react-router-dom';
+import { Container, Navbar, Nav, Dropdown } from 'react-bootstrap';
 
 import logoImg from '../../assets/passarinho.svg';
 
@@ -29,6 +29,19 @@ function Header(props) {
             </Navbar.Brand>
           </NavLink>
         ) }
+
+        <Dropdown className="d-md-none">
+          <Dropdown.Toggle variant="dark" id="dropdown-basic">
+            Menu
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu alignRight>
+            <Dropdown.Item as={Link} className="nav-link" to="/">Início</Dropdown.Item>
+            <Dropdown.Item as={Link} className="nav-link" to="/search">Pesquisar</Dropdown.Item>
+            <Dropdown.Item as={Link} className="nav-link" to="/fansubs">Fansubs</Dropdown.Item>
+            <Dropdown.Item as={Link} className="nav-link" to="/about">Sobre</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
 
         <Navbar.Collapse id="navbar-id">
           <Nav className="ml-auto">
