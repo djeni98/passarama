@@ -4,7 +4,14 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen, fireEvent, waitForElementToBeRemoved, waitFor } from '@testing-library/react';
 import Fansubs from './index.js';
 
+import {
+  mockGetArray as mockGet, pageAsyncContentTest,
+  loadMoreTest, loadErrorTest,
+} from '../test_utils';
+
 jest.mock('../api');
+
+const LIMIT = 10;
 
 function createData(items) {
   return [...Array(items).keys()].map(index => {
@@ -17,109 +24,51 @@ function createData(items) {
   });
 }
 
-function mockGet(data = [], error = false) {
-  api.get.mockImplementationOnce((url, { params }) => {
-    const start = params.offset;
-    const end = start + params.limit;
-
-    if (error) {
-      return Promise.reject({ message: 'some error' });
-    }
-    return Promise.resolve({ data: { total: data.length, results: data.slice(start, end) } });
-  });
-
+function setup(data = [], error = false) {
+  mockGet(data, error);
+  const { container } = render(<Fansubs />, { wrapper: MemoryRouter });
+  return { container, data };
 }
 
-test('renders fansubs page', async () => {
-  const data = createData(20);
+test('renders fansubs page structure', async () => {
+  const { container } = setup();
 
-  mockGet(data);
-
-  const { container } = render(<Fansubs />, { wrapper: MemoryRouter });
-  
   const header = container.querySelector('header');
   const fansubsTitle = screen.getByRole('heading', { name: /fansub/i });
-  const loading = screen.getByRole('heading', { name: /carregando/i });
   const footer = screen.getByRole('contentinfo');
-  
+
   expect(header).toBeInTheDocument();
 
   expect(fansubsTitle).toBeInTheDocument();
   expect(fansubsTitle).toHaveTextContent('Fansubs');
 
-  expect(loading).toBeInTheDocument();
-  expect(loading).toHaveTextContent('Carregando');
-
   expect(footer).toBeInTheDocument();
 
-  const results = await screen.findByRole('heading', { name: /resultado/i });
-  const loadMoreButton = screen.getByRole('button', { name: /mais/i });
+  await screen.findByRole('heading', { name: /resultado/i });
+});
 
-  expect(results).toBeInTheDocument();
-  expect(results).toHaveTextContent(data.length);
-
-  // Default
-  const offset = 0;
-  const limit = 10;
-  const partialData = data.slice(offset, limit);
-
-  partialData.forEach(item => {
+test('renders fansubs page async content', async () => {
+  const itemsFunction = (item, index) => {
     const title = screen.getByText(item.name);
-    const facebook = container.querySelector(`[href="${item.facebook}"]`);
     const link = screen.getByRole('link', { name: item.link });
 
     expect(title).toBeInTheDocument();
 
+    const facebook = screen.getAllByRole('link', { name: /facebook/i })[index];
     expect(facebook).toBeInTheDocument();
     expect(facebook).toHaveAttribute('href', item.facebook);
 
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute('href', item.link);
-  });
-  
-  expect(loadMoreButton).toBeInTheDocument();
-  expect(loadMoreButton).toHaveTextContent('Mais Resultados'); 
+  }
+
+  await pageAsyncContentTest(() => setup(createData(20)), LIMIT, itemsFunction);
 });
 
 test('loadMore button click loads more data', async () => {
-  const data = createData(20);
-
-  mockGet(data);
-
-  const { container } = render(<Fansubs />, { wrapper: MemoryRouter });
-  
-  const loadMoreButton = await screen.findByRole('button', { name: /mais/i });
-
-  let offset = 0;
-  const limit = 10;
-  let partialData = data.slice(offset, offset+limit);
-
-  partialData.forEach(item =>
-    expect(screen.getByText(item.name)).toBeInTheDocument()
-  );
-  
-  mockGet(data);
-
-  fireEvent.click(loadMoreButton);
-  expect(loadMoreButton).not.toHaveTextContent('Mais Resultados');
-  expect(loadMoreButton).toHaveTextContent('Carregando');
-
-  await waitForElementToBeRemoved(() => screen.queryByText(/carregando/i));
-
-  offset += limit;
-  partialData = data.slice(offset, offset+limit);
-
-  partialData.forEach(item =>
-    expect(screen.getByText(item.name)).toBeInTheDocument()
-  );
+  await loadMoreTest(() => setup(createData(20)), LIMIT, ['name', 'link']);
 });
 
 test('load error', async () => {
-  mockGet([], true);
-
-  const { container } = render(<Fansubs />, { wrapper: MemoryRouter });
-  await waitForElementToBeRemoved(() => screen.queryByText(/carregando/i));
-
-  expect(screen.queryByText(/resultado/i)).not.toBeInTheDocument();
-  expect(screen.getByText(/erro/i)).toBeInTheDocument();
+  await loadErrorTest(() => setup([], true));
 });

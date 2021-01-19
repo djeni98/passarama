@@ -4,6 +4,8 @@ import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 import api from '../api';
 import { getMessageAndImageFromError } from '../utils';
 
+import noResultsImg from '../../assets/no-results.svg';
+
 import Header from '../Header';
 import Footer from '../Footer';
 import ErrorDisplayer from '../ErrorDisplayer';
@@ -79,7 +81,10 @@ export default function Fansubs() {
                       <div className="d-flex justify-content-between">
                         <Card.Title>{fansub.name}</Card.Title>
                         <Card.Link href={fansub.facebook} target="_blank">
-                        <h5><i className="fa fa-facebook-square"></i></h5>
+                        <h5>
+                          <i className="fa fa-facebook-square"></i>
+                          <span className="sr-only">Facebook</span>
+                        </h5>
                         </Card.Link>
                       </div>
                       <Card.Link href={fansub.link} target="_blank">{fansub.link}</Card.Link>
@@ -110,6 +115,19 @@ export default function Fansubs() {
               </Col>
             </Row>
           ) : null }
+        </Container>
+      ) : null }
+
+      { !total && !loading && !error ? (
+        <Container className="mb-7">
+          <Row xs={1}>
+            <Col>
+              <h2 className="mb-5 text-center">Nenhum resultado foi encontrado</h2>
+            </Col>
+            <Col className="center">
+              <img src={noResultsImg} className="img-w100" alt="Nenhum resultado encontrado"/>
+            </Col>
+          </Row>
         </Container>
       ) : null }
 
