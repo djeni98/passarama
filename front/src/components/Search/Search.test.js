@@ -54,7 +54,7 @@ test('renders search page with no query', async () => {
   
   // Search Bar
   const input = screen.getByRole('textbox');
-  const button = screen.getByRole('button');
+  const button = screen.getByRole('button', { name: /pesquisa/i });
 
   const footer = screen.getByRole('contentinfo');
   
@@ -74,7 +74,7 @@ test('renders search page', async () => {
   expect(loading).toHaveTextContent('Carregando');
 
   const results = await screen.findByRole('heading', { name: /resultado/i });
-  const loadMoreButton = screen.getByRole('button', { name: /resultado/i });
+  const loadMoreButton = screen.getByRole('button', { name: /mais/i });
 
   expect(results).toBeInTheDocument();
   expect(results).toHaveTextContent(data.length);
@@ -103,7 +103,7 @@ test('renders search page', async () => {
 test('loadMore button click loads more data', async () => {
   const { container, data } = setup('search', createData(40));
 
-  const loadMoreButton = await screen.findByRole('button', { name: /resultado/i });
+  const loadMoreButton = await screen.findByRole('button', { name: /mais/i });
 
   let offset = 0;
   let partialData = data.slice(offset, offset+LIMIT);
@@ -139,7 +139,7 @@ test('first search load error', async () => {
 
 test('loadMore load error', async () => {
   setup('search', createData(40));
-  const loadMoreButton = await screen.findByRole('button', { name: /resultado/i });
+  const loadMoreButton = await screen.findByRole('button', { name: /mais/i });
 
   mockGet([], true);
   fireEvent.click(loadMoreButton);

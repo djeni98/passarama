@@ -19,7 +19,7 @@ function setup() {
 
   const logoImg = screen.getByRole('img', { name: /logo/i });
   const searchInput = screen.getByRole('textbox');
-  const searchButton = screen.getByRole('button');
+  const searchButton = screen.getByRole('button', { name: /pesquisa/i });
 
   const footer = screen.getByRole('contentinfo');
 

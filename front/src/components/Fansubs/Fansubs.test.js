@@ -53,7 +53,7 @@ test('renders fansubs page', async () => {
   expect(footer).toBeInTheDocument();
 
   const results = await screen.findByRole('heading', { name: /resultado/i });
-  const loadMoreButton = screen.getByRole('button');
+  const loadMoreButton = screen.getByRole('button', { name: /mais/i });
 
   expect(results).toBeInTheDocument();
   expect(results).toHaveTextContent(data.length);
@@ -88,7 +88,7 @@ test('loadMore button click loads more data', async () => {
 
   const { container } = render(<Fansubs />, { wrapper: MemoryRouter });
   
-  const loadMoreButton = await screen.findByRole('button');
+  const loadMoreButton = await screen.findByRole('button', { name: /mais/i });
 
   let offset = 0;
   const limit = 10;
@@ -102,8 +102,9 @@ test('loadMore button click loads more data', async () => {
 
   fireEvent.click(loadMoreButton);
   expect(loadMoreButton).not.toHaveTextContent('Mais Resultados');
+  expect(loadMoreButton).toHaveTextContent('Carregando');
 
-  await waitForElementToBeRemoved(() => screen.queryByRole('button'));
+  await waitForElementToBeRemoved(() => screen.queryByText(/carregando/i));
 
   offset += limit;
   partialData = data.slice(offset, offset+limit);

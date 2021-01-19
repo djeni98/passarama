@@ -29,6 +29,7 @@ function SearchBar(props) {
           onClick={() => callback(value)}
       >
         <span className="material-icons">search</span>
+        <span className="sr-only">Pesquisar</span>
       </button>
     </div>
   );
