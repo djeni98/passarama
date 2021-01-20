@@ -75,6 +75,11 @@ button {
   justify-content: center;
 }
 
+button:focus {
+  outline: none;
+  overflow-anchor: none;
+}
+
 button:hover {
   opacity: 0.8;
   transition: 0.2s;
