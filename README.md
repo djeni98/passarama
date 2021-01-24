@@ -18,3 +18,9 @@ database.
 * [Crawler](crawler/README.md): Python and Scrapy
 * [Back-end](back/README.md): Python, Flask and SQLite
 * [Front-end](front/README.md): React and React-Bootstrap
+
+## License
+
+GNU General Public License v3.0 or later
+
+See [COPYING](COPYING) to see the full text.
