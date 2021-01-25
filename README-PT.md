@@ -20,3 +20,9 @@ fansub que não estão presentes no banco de dados.
 * [Crawler](crawler/README-PT.md): Python e Scrapy
 * [Back-end](back/README-PT.md): Python, Flask e SQLite
 * [Front-end](front/README-PT.md): React e React-Bootstrap
+
+## Licença
+
+Licença Pública Geral GNU (_GNU General Public License_) v3.0 ou posterior.
+
+Veja [COPYING](COPYING) para ver o texto na íntegra.
