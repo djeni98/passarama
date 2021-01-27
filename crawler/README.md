@@ -20,6 +20,7 @@ In pipeline, the video content data are stored into dorama table.
 * [mahal](doramas_crawler/spiders/mahal.py)
 * [puripuri](doramas_crawler/spiders/puripuri.py)
 * [dorameirason](doramas_crawler/spiders/dorameirason.py)
+* [banzai](doramas_crawler/spiders/banzai.py)
 * [yumeko](doramas_crawler/spiders/yumeko.py) (deactivated)
 
 ## Install
