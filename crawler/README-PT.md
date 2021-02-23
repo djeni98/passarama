@@ -23,6 +23,7 @@ No _pipeline_, os dados do conteúdo de vídeo é armazenado na tabela dorama.
 * [dorameirason](doramas_crawler/spiders/dorameirason.py)
 * [banzai](doramas_crawler/spiders/banzai.py)
 * [euamodoramas](doramas_crawler/spiders/euamodoramas.py)
+* [life](doramas_crawler/spiders/life.py)
 * [yumeko](doramas_crawler/spiders/yumeko.py) (desativada)
 
 ## Instalação
