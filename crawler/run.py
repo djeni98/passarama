@@ -44,7 +44,7 @@ if args.sem_pipeline:
 process = CrawlerProcess(settings)
 spider_loader = process.spider_loader
 
-inactive = ['yumeko']
+inactive = ['yumeko', 'dorameirason']
 spiders = [ spider_loader.load(spider) for spider in spider_loader.list() if spider not in inactive ]
 
 ## --- Command Line -- ##
